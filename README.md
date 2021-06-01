@@ -8,12 +8,17 @@
 - Different collections are written by different processors. Those writing processors are distributed among nodes as eveny as possible.
 - All the other processors have to wait for the wrting processors to  finish jobs before responding to Clients’ next round of requests.
 
+![MultiServer](fig_MpiServerClass.png)
 
 
 **MultiGroupServer Class**
 - The oserver is devided into frontend and backend.
 - When the frontend receive the data,  its root process asks backend‘s root (or head) for an idle process for each collection. Then it broadcasts the info to the other frontend processes.
 - When the frontend processors  forward (`MPI_SEND`)  the data to the backend ( different collections to different backend processors), they get back the the clients without waiting for the actual writing.
+
+![MultiGroup](fig_MultiGroupServerClass.png)
+
+![dist](fig_FrontendBackend.png)
 
 
 ## Command Line
