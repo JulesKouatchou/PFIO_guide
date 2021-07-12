@@ -119,10 +119,10 @@ It returns the following timing statistics:
 - `o_server_front`: 
 - `--wait_message`:  Time while the front ends is waiting for the data from application. 
 - `--add_Histcollection`: Time for adding history collections.  
-- `--receive_data`:  The total time front ends receive data from applications.
-- `----collection_1`:  The time front ends receive collection_1.
--  `--forward_data`:  The total time front ends forward data.
-- `----collection_1`:  The time front ends forward collection_1.
+- `--receive_data`:  The total time Frontends receive data from applications.
+- `----collection_1`:  The time Frontends receive collection_1.
+-  `--forward_data`:  The total time Frontends forward data to Backend.
+- `----collection_1`:  The time Frontends forward collection_1.
 - `--clean up`:  The time finalizing o-server.
 
 `IM=360 JM=181 KM=72`
