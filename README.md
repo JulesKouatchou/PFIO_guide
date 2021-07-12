@@ -125,7 +125,9 @@ It returns the following timing statistics:
 - `----collection_1`:  The time Frontends forward collection_1.
 - `--clean up`:  The time finalizing o-server.
 
-`IM=360 JM=181 KM=72`
+`IM=360 JM=181 KM=72` 
+
+with 5 Backend PEs/node
 
         =============
         Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
@@ -142,8 +144,17 @@ It returns the following timing statistics:
         --forward_data        0.057849  16.19  0.017939   5.02  0.051281  0.000058  0020   0018
         ----collection_1      0.039910  11.17  0.039910  11.17  0.048129  0.030721  0018   0019
         --clean up            0.000325   0.09  0.000325   0.09  0.000529  0.000244  0009   0017
+        
+ 
+ |                 | Number of Backend PES/node | | | | | 
+ | ---  | ---  | ---  | ---  | ---  | ---  |
+ |                 | 1 | 2 | 3 | 4 | 5 |
+ | i_server_client |   |   |   |   |   |
+ | o_server_front  |   |   |   |   |   |
 
-`IM=720 JM=361 KM=72`
+`IM=720 JM=361 KM=72` 
+
+with 5 Backend PEs/node
 
         =============
         Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
