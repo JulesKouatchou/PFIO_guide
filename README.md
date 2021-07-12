@@ -145,12 +145,15 @@ with 5 Backend PEs/node
         ----collection_1      0.039910  11.17  0.039910  11.17  0.048129  0.030721  0018   0019
         --clean up            0.000325   0.09  0.000325   0.09  0.000529  0.000244  0009   0017
         
+ In the table below, we report the **Inclusive** time for the two main IO components as the number of backend PEs per node varies:
  
- | Inclusive | Number of Backend PES/node | | | | | 
- | ---  | ---  | ---  | ---  | ---  | ---  |
- |                 | 1 | 2 | 3 | 4 | 5 |
- | i_server_client |   | 1.186932  | 0.291334  | 0.259511  |  0.324201 |
- | o_server_front  |   | 1.813097  | 1.216281  | 0.296956  |  0.357244 |
+  | Number of Backend PES/node | i_server_client | o_server_front  |
+ |  ---:  | ---  | ---  | ---  |
+ | 1 |     |     |
+ | 2 |  1.186932   |  1.813097   |
+ | 3 |  0.291334   |  1.216281   |
+ | 4 |  0.259511   |  0.296956   |
+ | 5 |  0.324201   |  0.357244   |
 
 `IM=720 JM=361 KM=72` 
 
@@ -173,8 +176,13 @@ with 5 Backend PEs/node
         --clean up            0.000367   0.03  0.000367   0.03  0.000552  0.000256  0004   0012
         
 
- |  Inclusive   | Number of Backend PES/node | | | | | 
- | ---  | ---  | ---  | ---  | ---  | ---  |
- |                 | 1 | 2 | 3 | 4 | 5 |
- | i_server_client |   | 3.378511  | 0.977153  | 1.009190  | 1.050624  |
- | o_server_front  |   | 5.795466  | 6.262224  | 1.203735  | 1.250806  |
+ In the table below, we report the **Inclusive** time for the two main IO components as the number of backend PEs per node varies:
+ 
+ | Number of Backend PEs/node | i_server_client | o_server_front  |
+ |  ---:  | ---  | ---  | ---  |
+ | 1 |     |     |
+ | 2 |  3.378511   | 5.795466    |
+ | 3 |  0.977153   | 6.262224    |
+ | 4 |  1.009190   | 1.203735    |
+ | 5 |  1.050624   | 1.250806    |
+ 
