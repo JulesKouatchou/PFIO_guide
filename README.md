@@ -100,9 +100,34 @@ If we reserve 2 `haswell` nodes (28 cores in each), want to run the model on 28 
 - The frontend has `28-5=23` processes and the backend has `5` processes.
 
 ### Performance Analysis
+We create a collection that contains:
+- one 2D variable (`IMxJM`)
+- one 3D variable (`IMxJMxKM`)
 
-360x181
+Three (3) 'daily' files are written out and each of them contains six (6) time records. 
+We measure the time to perform the IO operations.
+Note that no calculations are involved here. We only do the array initialization.
 
+PFIO has a profiling tool which is exercised by passing the command line option: `--with_io_profiler true`
+
+    mpiexec -np 56 $MAPLBIN/pfio_MAPL_demo.x --npes_model 28 --oserver_type multigroup --nodes_output_server 1 --npes_backend_pernode 5 --with_io_profiler true
+
+It returns the following timing statistics:
+
+- **Inclusive**:  all time spent between start and stop of a given timer.
+- **Exclusive**:  all time spent between start and stop of a given timer \_except\_ time spent in any other timers.
+- `o_server_front`: 
+- `--wait_message`:  Time while the front ends is waiting for the data from application. 
+- `--add_Histcollection`: Time for adding history collections.  
+- `--receive_data`:  The total time front ends receive data from applications.
+- `----collection_1`:  The time front ends receive collection_1.
+-  `--forward_data`:  The total time front ends forward data.
+- `----collection_1`:  The time front ends forward collection_1.
+- `--clean up`:  The time finalizing o-server.
+
+`IM=360 JM=181 KM=72`
+
+        =============
         Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
         i_server_client       0.324201 100.00  0.324201 100.00  0.520954  0.245613  0016   0023
 
@@ -117,8 +142,8 @@ If we reserve 2 `haswell` nodes (28 cores in each), want to run the model on 28 
         --forward_data        0.057849  16.19  0.017939   5.02  0.051281  0.000058  0020   0018
         ----collection_1      0.039910  11.17  0.039910  11.17  0.048129  0.030721  0018   0019
         --clean up            0.000325   0.09  0.000325   0.09  0.000529  0.000244  0009   0017
-        
-720x361
+
+`IM=720 JM=361 KM=72`
 
         =============
         Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
