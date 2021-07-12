@@ -147,8 +147,8 @@ with 5 Backend PEs/node
         
  In the table below, we report the **Inclusive** time for the two main IO components as the number of backend PEs per node varies:
  
-  | Number of Backend PES/node | i_server_client | o_server_front  |
- |  ---:  | ---  | ---  | ---  |
+  | Number of Backend PEs/node | i_server_client | o_server_front  |
+ |  ---:  | ---  | ---  |
  | 1 |     |     |
  | 2 |  1.186932   |  1.813097   |
  | 3 |  0.291334   |  1.216281   |
@@ -179,7 +179,7 @@ with 5 Backend PEs/node
  In the table below, we report the **Inclusive** time for the two main IO components as the number of backend PEs per node varies:
  
  | Number of Backend PEs/node | i_server_client | o_server_front  |
- |  ---:  | ---  | ---  | ---  |
+ |  ---:  | ---  | ---  |
  | 1 |     |     |
  | 2 |  3.378511   | 5.795466    |
  | 3 |  0.977153   | 6.262224    |
