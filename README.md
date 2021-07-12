@@ -146,11 +146,11 @@ with 5 Backend PEs/node
         --clean up            0.000325   0.09  0.000325   0.09  0.000529  0.000244  0009   0017
         
  
- |                 | Number of Backend PES/node | | | | | 
+ | Inclusive | Number of Backend PES/node | | | | | 
  | ---  | ---  | ---  | ---  | ---  | ---  |
  |                 | 1 | 2 | 3 | 4 | 5 |
- | i_server_client |   |   |   |   |   |
- | o_server_front  |   |   |   |   |   |
+ | i_server_client |   | 1.186932  | 0.291334  | 0.259511  |  0.324201 |
+ | o_server_front  |   | 1.813097  | 1.216281  | 0.296956  |  0.357244 |
 
 `IM=720 JM=361 KM=72` 
 
@@ -173,4 +173,8 @@ with 5 Backend PEs/node
         --clean up            0.000367   0.03  0.000367   0.03  0.000552  0.000256  0004   0012
         
 
-
+ |  Inclusive   | Number of Backend PES/node | | | | | 
+ | ---  | ---  | ---  | ---  | ---  | ---  |
+ |                 | 1 | 2 | 3 | 4 | 5 |
+ | i_server_client |   | 3.378511  | 0.977153  | 1.009190  | 1.050624  |
+ | o_server_front  |   | 5.795466  | 6.262224  | 1.203735  | 1.250806  |
