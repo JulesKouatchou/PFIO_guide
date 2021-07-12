@@ -99,3 +99,42 @@ If we reserve 2 `haswell` nodes (28 cores in each), want to run the model on 28 
 
 - The frontend has `28-5=23` processes and the backend has `5` processes.
 
+### Performance Analysis
+
+360x181
+
+        Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
+        i_server_client       0.324201 100.00  0.324201 100.00  0.520954  0.245613  0016   0023
+
+        Final profile
+        =============
+        Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
+        o_server_front        0.357244 100.00  0.053738  15.04  0.881602  0.013470  0000   0002
+        --wait_message        0.047207  13.21  0.047207  13.21  0.052244  0.040038  0011   0013
+        --add_Histcollection  0.003346   0.94  0.003346   0.94  0.005641  0.000294  0002   0007
+        --receive_data        0.194778  54.52  0.000496   0.14  0.000696  0.000367  0013   0019
+        ----collection_1      0.194282  54.38  0.194282  54.38  0.421234  0.113870  0013   0021
+        --forward_data        0.057849  16.19  0.017939   5.02  0.051281  0.000058  0020   0018
+        ----collection_1      0.039910  11.17  0.039910  11.17  0.048129  0.030721  0018   0019
+        --clean up            0.000325   0.09  0.000325   0.09  0.000529  0.000244  0009   0017
+        
+720x361
+
+        =============
+        Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
+        i_server_client       1.050624 100.00  1.050624 100.00  1.515223  0.822786  0015   0025
+
+        Final profile
+        =============
+        Name                 Inclusive % Incl Exclusive % Excl Max Excl  Min Excl  Max PE Min PE
+        o_server_front        1.250806 100.00  0.128693  10.29  2.737311  0.008478  0000   0012
+        --wait_message        0.108261   8.66  0.108261   8.66  0.130712  0.081595  0008   0022
+        --add_Histcollection  0.003061   0.24  0.003061   0.24  0.004589  0.001020  0004   0002
+        --receive_data        0.789012  63.08  0.000642   0.05  0.000909  0.000484  0013   0019
+        ----collection_1      0.788370  63.03  0.788370  63.03  1.568300  0.406615  0013   0021
+        --forward_data        0.221412  17.70  0.102570   8.20  0.378546  0.000081  0021   0018
+        ----collection_1      0.118842   9.50  0.118842   9.50  0.145169  0.090811  0013   0021
+        --clean up            0.000367   0.03  0.000367   0.03  0.000552  0.000256  0004   0012
+        
+
+
