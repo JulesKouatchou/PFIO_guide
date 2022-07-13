@@ -220,7 +220,7 @@ and the total time to complete the integration.
 | 9 | 1.73 | 1.58 | 3948 | 8297 |
 
 
-[fig_stats](fig_lis_pfio_stats.png)
+![fig_stats](fig_lis_pfio_stats.png)
 
 #### Comments
 
