@@ -186,3 +186,48 @@ with 5 Backend PEs/node
  | 4 |  1.009190   | 1.203735    |
  | 5 |  1.050624   | 1.250806    |
  
+
+# Implementation of PFIO in LIS
+
+## Test Case
+
+### Model Configuration
+
+- 5901x2801 grid points
+- one-day integration with output produced every 3 hours (8 files with one record each)
+- The fields to be written out are:
+    - 80 2D fields
+    - 4 3D fields (with 4 levels)
+
+Without any data compression, each output file produced here requires 6.43 Gb.
+Our goal here is not only to reduce the time spent on IO but also to decrease
+the file size by applying data compression.
+
+### Results
+
+We ran the orgininal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO).
+As the datacompression level varies, we recorded the average output file size (out of 8 files)
+and the total time to complete the integration.
+
+| Deflation Level  <td colspan=2> Average File Size (Gb) <td colspan=2>Total Time (s) |
+|---
+| | **ORG** | **PFIO** | **ORG** | **PFIO** |
+| 0 | 6.03 | 6.03 | 734 | 1023 |
+| 1 | 1.76 | 1.71 | 1484 | 1213 |
+| 3 | 1.74 | 1.65 | 1928 | 1403 |
+| 5 | 1.75 | 1.61 | 2121 | 1670 |
+| 7 | 1.74 | 1.59 | 3388 | 2376 |
+| 9 | 1.73 | 1.58 | 3948 | 8297 |
+
+
+[fig_stats](fig_lis_pfio_stats.png)
+
+#### Comments
+
+From the above statistics, we can make the following comments:
+
+- Using the deflation level 1 is most cost effective in both ORG and PFIO.
+    - At such level, PFIO runs faster tends to generate a smaller file size.
+- At deflation level 9, the time to collect the data and do data compression appears to be higher than the model computing time. PFIO performs very poorly.
+- PFIO works better when the model computations require more time than the communications between the computing cores and the IO servers.
+- As we increase the model resolution and produce the data less often (say every 12 hours for instance), we expect PFIO to perform better.
