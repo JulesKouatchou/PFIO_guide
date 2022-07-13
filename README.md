@@ -209,8 +209,8 @@ We ran the orgininal version of the LIS code (ORG) and the one with the PFIO imp
 As the datacompression level varies, we recorded the average output file size (out of 8 files)
 and the total time to complete the integration.
 
-| Deflation Level  | Average File Size | | Total Time (s) | |
-|--- | ---| --- | --- |
+| Deflation Level  | Average File Size | . | Total Time (s) | . |
+|--- | ---| --- | --- | --- |
 | | **ORG** | **PFIO** | **ORG** | **PFIO** |
 | 0 | 6.03 | 6.03 | 734 | 1023 |
 | 1 | 1.76 | 1.71 | 1484 | 1213 |
