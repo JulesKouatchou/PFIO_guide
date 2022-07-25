@@ -221,7 +221,10 @@ Therefore, there is only one command line configuration when PFIO is used in LIS
 For PFIO to be effective in LIS, we need at least two requirements:
 - The process to produce the HISTORY files is more expensive than the calculations.
 - The elapsed time between the full creation two consecutive HISTORY files is less than the model integration time. 
-    -  If not, the ouput node might be busy and oversubcribed.
+    -  If not, the ouput node might be continually busy and oversubcribed.
+
+The LIS code does not have a profiler. In all the experiments we have done, we measure the total elapsed times.
+We plan to integrate a profiling tool in LIS that will allow us to better capture the time it takes to execute various components of the code.
 
 ## Test Case
 
@@ -239,14 +242,16 @@ the file size by applying data compression.
 
 ### Results with 112 Compute Cores
 
-We ran the orgininal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO).
-As the datacompression level varies, we recorded the average output file size (out of 8 files)
+We ran the orginal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO).
+As the data compression level varies, we recorded the average output file size (out of 8 files)
 and the total time to complete the integration.
+
+It is assumed that the PFIO option uses one additional node (reserved for output) with repected to the original version of the code.
 
 | Deflation Level  | Average File Size |  | Total Time (s) |  |
 |--- | ---| --- | --- | --- |
 | | **ORG** | **PFIO** | **ORG** | **PFIO** |
-| 0 | 6.03 | 6.03 | 734 | 1023 |
+| 0 | 6.43 | 6.43 | 734 | 1023 |
 | 1 | 1.76 | 1.71 | 1484 | 1213 |
 | 3 | 1.74 | 1.65 | 1928 | 1403 |
 | 5 | 1.75 | 1.61 | 2121 | 1670 |
@@ -258,6 +263,9 @@ and the total time to complete the integration.
 
 ### Results when the Number of Compute Cores Varies
 
+We use the data compression level of 1 and let the number of compute cores varies. 
+We record the total time for a one-day integration and the HISTORY file created every three hours.
+
 | # Compute Cores | **ORG** | **PFIO** | Gain/Loss |
 | ---- | --- | --- | --- |
 | 112 | 1484 | 1213 | +18% |
@@ -265,6 +273,8 @@ and the total time to complete the integration.
 | 168 | 1292 | 1272 | +1.5%|
 | 196 |  1267 | 1374 | -8.4% |
 
+As the number of computee cores increases, PFIO becomes less attractive.
+It is more likely due to the fact PFIO is not done before the model completes the calculations, therefore creation data congestion in the output server node.
 
 #### Comments
 
