@@ -281,7 +281,7 @@ It is more likely due to the fact PFIO is not done before the model completes th
 From the above statistics, we can make the following comments:
 
 - Using the deflation level 1 is most cost effective in both ORG and PFIO.
-    - At such level, PFIO runs faster tends to generate a smaller file size.
+    - At such level, PFIO runs faster and tends to generate a smaller file size.
 - At deflation level 9, the time to collect the data and do data compression appears to be higher than the model computing time. PFIO performs very poorly.
 - PFIO works better when the model computations require more time than the communications between the computing cores and the IO servers.
-- As we increase the model resolution and produce the data less often (say every 12 hours for instance), we expect PFIO to perform better.
+- As we increase the model resolution and the IO dominates the model calculations, we expect PFIO to perform better.
