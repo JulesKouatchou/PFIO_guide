@@ -203,7 +203,7 @@ Without any data compression, each output file produced here requires 6.43 Gb.
 Our goal here is not only to reduce the time spent on IO but also to decrease
 the file size by applying data compression.
 
-### Results
+### Results with 112 Compute Cores
 
 We ran the orgininal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO).
 As the datacompression level varies, we recorded the average output file size (out of 8 files)
@@ -221,6 +221,16 @@ and the total time to complete the integration.
 
 
 ![fig_stats](fig_lis_pfio_stats.png)
+
+### Results when the Number of Compute Cores Varies
+
+| # Compute Cores | **ORG** | **PFIO** | Gain/Loss |
+| ---- | --- | --- | --- |
+| 112 | 1484 | 1213 | +18% |
+| 140 | 1340 | 1198 | +11% |
+| 168 | 1292 | 1272 | +1.5%|
+| 196 |  1267 | 1374 | -8.4% |
+
 
 #### Comments
 
