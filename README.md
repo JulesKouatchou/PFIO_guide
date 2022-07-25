@@ -28,7 +28,9 @@ There are two options to submit an executable through the `mpi_run` or `mpi_exec
 ### Regular MPI Command
 If the regular `mpi_run` or `mpi_exec` command is used:
 
-    mpi_run -np npes ExeccuTable
+```
+    mpirun -np npes ExeccuTable
+```
 
 the `MpiServer` is used as `oserver`.
 The `client` processes are overlapping with `oserver` processes.
@@ -39,7 +41,9 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 ### Command with IOserver Options
 #### `n1` processes for the model and `n2` processes for the `MpiServer`
 
-    mpi_run -np npes ExeccuTable –npes_model n1  --npes_output_server n2
+```
+    mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2
+```
 
 - Note that `npes` is not equal to `n1+n2`.
 - The `client` (model) will use the minimum number of nodes that contain `n1` cores. For example, if each node has `n` processors, the `npes = ceiling(n1/n)*n + n2`.
@@ -48,7 +52,9 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 
 #### `n1` processes for the model and `n2` processes for the `MultiGroupServer` 
 
-    mpi_run -np npes ExeccuTable –npes_model n1 --npes_output_server n2 --oserver_type multigroup --npes_backend_pernode n3
+```
+    mpirun -np npes ExeccuTable –npes_model n1 --npes_output_server n2 --oserver_type multigroup --npes_backend_pernode n3
+```
 
 - For each node of oserver, `n3` processes are used as backend.
 - For example, if each node has `n` cores, then `npes = ceiling(n1/n)*n + n2*n`.
@@ -57,17 +63,21 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 
 #### Passing a vector of `oservers`
 
-    mpi_run -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4
+```
+    mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4
+```
 
 - The command creates `n2`-node, `n3`-nodes and `n4`-nodes `MpiServer`.
 - The `oservers` are independent. The client would take turns to send data to different `oservers`.
 - If each node has `n` processors, then `npes = ceiling(n1/n)*n + (n2+n3+n4)*n`.
-- **Advantage**: Since the `oservers` are independent, the `client` has choice to send data to idle `oserver`.
+- **Advantage**: Since the `oservers` are independent, the `client` has the choice to send the data to the idle `oserver`.
 - **Disavantage**: Finding an idle `oserver` is not easy.
 
 #### Passing a vector of `oservers` and the `MultiGroupServer`
 
-    mpi_run -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4 --oserver_type multigroup --npes_backend_pernode n5
+```
+    mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4 --oserver_type multigroup --npes_backend_pernode n5
+```
 
 - The command creates `n2`-node, `n3`-nodes and `n4`-nodes `MultiGroupServer`.
 - The `oservers` are independent. The `client` would take turns to send data to different `oservers`.
@@ -77,7 +87,9 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 
 #### `MpiServer` using one-sided `MPI_PUT` and shared memory
 
-   mpi_run -np npes ExeccuTable –npes_model n1 --npes_output_server n2 --one_node_output true
+```
+   mpirun -np npes ExeccuTable –npes_model n1 --npes_output_server n2 --one_node_output true
+```
 
 - The option `--one_node_output true` makes it easy to create `n2` oservers and each is one-node oserver.
 - It is equivalent to `--nodes_output_server 1 1 1 1 1 ...` with `n2` “1”s.
@@ -95,7 +107,9 @@ It writes several time records of 2D and 3D arrays.
 The compilation of the program generates the executable, `pfio_MAPL_demo.x`.
 If we reserve 2 `haswell` nodes (28 cores in each), want to run the model on 28 cores and use 1 `MultiGroup` with 5 backend processes, then the execution command is:
 
+```
     mpiexec -np 56 pfio_MAPL_demo.x --npes_model 28 --oserver_type multigroup --nodes_output_server 1 --npes_backend_pernode 5
+```
 
 - The frontend has `28-5=23` processes and the backend has `5` processes.
 
@@ -186,8 +200,28 @@ with 5 Backend PEs/node
  | 4 |  1.009190   | 1.203735    |
  | 5 |  1.050624   | 1.250806    |
  
+ ***
 
 # Implementation of PFIO in LIS
+
+PFIO was added to the LIS code as a library. 
+A new file, `LIS_PFIO_HistoryMod.F90` was created to include PFIO related calls to produce LIS HISTORY.
+PFIO offers the option (see the above section) to run the code using either the standard `mpirun` command or an IO server (reserved for producing HISTORY only).
+Because the LIS code only has one collection (one HISTORY file), only one output server node (with any number of backend cores) is needed to use PFIO. Basically, we will have the command (assuming that we have 28 cores per node):
+
+```
+   set num_cores_per_node = 28
+   set           tot_npes = 224
+   @ comp_npes = ${tot_npes} - ${num_cores_per_node}
+   mpiexec -n $tot_npes $EXE --npes_model $comp_npes --oserver_type multigroup --nodes_output_server 1 --npes_backend_pernode 2
+```
+
+Therefore, there is only one command line configuration when PFIO is used in LIS.
+
+For PFIO to be effective in LIS, we need at least two requirements:
+- The process to produce the HISTORY files is more expensive than the calculations.
+- The elapsed time between the full creation two consecutive HISTORY files is less than the model integration time. 
+    -  If not, the ouput node might be busy and oversubcribed.
 
 ## Test Case
 
