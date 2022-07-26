@@ -26,7 +26,7 @@
 There are two options to submit an executable through the `mpi_run` or `mpi_exec` command.
 
 ### Regular MPI Command
-If the regular `mpi_run` or `mpi_exec` command is used:
+If the regular `mpirun` or `mpiexec` command is used:
 
 ```
     mpirun -np npes ExeccuTable
@@ -45,10 +45,11 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
     mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2
 ```
 
-- Note that `npes` is not equal to `n1+n2`.
-- The `client` (model) will use the minimum number of nodes that contain `n1` cores. For example, if each node has `n` processors, the `npes = ceiling(n1/n)*n + n2`.
-- If  `--isolate_nodes` is set to false ( by default, it is true), the `oserver` and `client` can co-exist in the same node, and `npes = n1 + n2`.
-- `--npes_output_server n2` can be replaced by  `--nodes_output_server n2`. Then the `npes = ceiling(n1/n)*n + n2*n`.
+- Note that $npes$ is not necessary equal to $n1+n2$.
+- The `client` (model) will use the minimum number of nodes that contain $n1$ cores. 
+     - For example, if each node has `n` processors, the $npes = ceiling(\frac{n1}{n})\times n + n$.
+- If  `--isolate_nodes` is set to false ( by default, it is true), the `oserver` and `client` can co-exist in the same node, and $npes = n1 + n2$.
+- `--npes_output_server n2` can be replaced by  `--nodes_output_server n2`. Then the $npes = ceiling(\frac{n1}{n})\times n + n2 \times n$.
 
 #### `n1` processes for the model and `n2` processes for the `MultiGroupServer` 
 
