@@ -271,10 +271,10 @@ We record the total time for a one-day integration and the HISTORY file created 
 
 | # Compute Cores | **ORG** | **PFIO** | Gain/Loss |
 | ---- | --- | --- | --- |
-| 112 | 1484 | 1213 | +18% |
-| 140 | 1340 | 1198 | +11% |
-| 168 | 1292 | 1272 | +1.5%|
-| 196 |  1267 | 1374 | -8.4% |
+| $112=14 \times  8$ | 1484 | 1213 | +18% |
+| $140=14 \times 10$ | 1340 | 1198 | +11% |
+| $168=14 \times 12$ | 1292 | 1272 | +1.5%|
+| $196=14 \times 14$ | 1267 | 1374 | -8.4% |
 
 As the number of computee cores increases, PFIO becomes less attractive.
 It is more likely due to the fact PFIO is not done before the model completes the calculations, therefore creation data congestion in the output server node.
