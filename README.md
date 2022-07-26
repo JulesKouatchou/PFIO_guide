@@ -221,8 +221,7 @@ Therefore, there is only one command line configuration when PFIO is used in LIS
 For PFIO to be effective in LIS, we need at least two requirements:
 - The process to produce the HISTORY files is signficantly more expensive than the calculations.
 - The elapsed time between the full creation (writing into disk) two consecutive HISTORY files is less than the model integration time. 
-    -  If not, the ouput node might be continually busy and oversubcribed. 
-    -  In PFIO, the IO server's other processors have to wait for the `wrting processors` to completely finish their tasks before responding to the next round of requests.
+    -  If not, the ouput node might be continually oversubcribed. 
 
 The LIS code does not have a profiler. In all the experiments we have done, we measure the total elapsed times.
 We plan to integrate a profiling tool in LIS that will allow us to better capture the time it takes to execute various components of the code.
