@@ -106,13 +106,13 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 The file `pfio_MAPL_demo.F90` is a standalone program that implement the use of PFIO.
 It writes several time records of 2D and 3D arrays.
 The compilation of the program generates the executable, `pfio_MAPL_demo.x`.
-If we reserve 2 `haswell` nodes (28 cores in each), want to run the model on 28 cores and use 1 `MultiGroup` with 5 backend processes, then the execution command is:
+If we reserve 2 `haswell` nodes (28 cores in each), run the model on 28 cores and use 1 `MultiGroup` with 5 backend processes, then the execution command is:
 
 ```
     mpiexec -np 56 pfio_MAPL_demo.x --npes_model 28 --oserver_type multigroup --nodes_output_server 1 --npes_backend_pernode 5
 ```
 
-- The frontend has `28-5=23` processes and the backend has `5` processes.
+- The frontend has $28-5=23$ processes and the backend has $5$ processes.
 
 ### Performance Analysis
 We create a collection that contains:
