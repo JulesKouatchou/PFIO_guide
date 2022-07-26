@@ -219,9 +219,10 @@ Because the LIS code only has one collection (one HISTORY file), only one output
 Therefore, there is only one command line configuration when PFIO is used in LIS.
 
 For PFIO to be effective in LIS, we need at least two requirements:
-- The process to produce the HISTORY files is more expensive than the calculations.
-- The elapsed time between the full creation two consecutive HISTORY files is less than the model integration time. 
-    -  If not, the ouput node might be continually busy and oversubcribed.
+- The process to produce the HISTORY files is signficantly more expensive than the calculations.
+- The elapsed time between the full creation (writing into disk) two consecutive HISTORY files is less than the model integration time. 
+    -  If not, the ouput node might be continually busy and oversubcribed. 
+    -  In PFIO, the IO server's other processors have to wait for the `wrting processors` to completely finish their tasks before responding to the next round of requests.
 
 The LIS code does not have a profiler. In all the experiments we have done, we measure the total elapsed times.
 We plan to integrate a profiling tool in LIS that will allow us to better capture the time it takes to execute various components of the code.
@@ -240,9 +241,11 @@ Without any data compression, each output file produced here requires 6.43 Gb.
 Our goal here is not only to reduce the time spent on IO but also to decrease
 the file size by applying data compression.
 
+In all the experiment we did, the LIS/PFIO code produced bitwise identical results as the original version of the code.
+
 ### Results with 112 Compute Cores
 
-We ran the orginal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO).
+We ran the orginal version of the LIS code (ORG) and the one with the PFIO implementation (PFIO) using a $14 \times 8$ processor decomposition.
 As the data compression level varies, we recorded the average output file size (out of 8 files)
 and the total time to complete the integration.
 
