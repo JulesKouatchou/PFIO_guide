@@ -13,7 +13,7 @@
 
 **MultiGroupServer Class**
 - The oserver is devided into frontend and backend.
-- When the frontend receive the data,  its root process asks backend‘s root (or head) for an idle process for each collection. Then it broadcasts the info to the other frontend processes.
+- <font color="red">When the frontend receive the data,  its root process asks backend‘s root (or head) for an idle process for each collection</font>. Then it broadcasts the info to the other frontend processes.
 - When the frontend processors  forward (`MPI_SEND`)  the data to the backend ( different collections to different backend processors), they get back to the clients without waiting for the actual writing.
 
 ![MultiGroup](fig_MultiGroupServerClass.png)
