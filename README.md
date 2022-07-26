@@ -47,7 +47,7 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 
 - Note that $npes$ is not necessary equal to $n1+n2$.
 - The `client` (model) will use the minimum number of nodes that contain $n1$ cores. 
-     - For example, if each node has `n` processors, then $npes = ceiling(\frac{n1}{n})\times n + n$.
+     - For example, if each node has `n` processors, then $npes = \lceil \frac{n1}{n} \rceil \times n + n$.
 - If  `--isolate_nodes` is set to false (by default, it is true), the `oserver` and `client` can co-exist in the same node, and $npes = n1 + n2$.
 - `--npes_output_server n2` can be replaced by  `--nodes_output_server n2`. Then the $npes = \lceil \frac{n1}{n} \rceil \times n + n2 \times n$.
 
@@ -60,7 +60,7 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 - For each node of oserver, $n3$ processes are used as backend.
 - For example, if each node has $n$ cores, then $npes = \lceil \frac{n1}{n} \rceil \times n + n2 \times n$.
 - The frontend has $n2 \times (n-n3)$ processes and the backend has $n3 \times n$ processes.
-- The frontend has $\lceil (\frac{n2}{n} \rceil \times (n-n3)$ processes and the backend has $n3 \times n$ processes.
+- The frontend has $\lceil \frac{n2}{n} \rceil \times (n-n3)$ processes and the backend has $n3 \times n$ processes.
 
 #### Passing a vector of `oservers`
 
