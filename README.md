@@ -42,13 +42,13 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
 #### `n1` processes for the model and `n2` processes for the `MpiServer`
 
 ```
-    mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2
+    mpirun -np npes ExeccuTable –npes_model n1 --npes_output_server n2
 ```
 
 - Note that $npes$ is not necessary equal to $n1+n2$.
 - The `client` (model) will use the minimum number of nodes that contain $n1$ cores. 
-     - For example, if each node has `n` processors, the $npes = ceiling(\frac{n1}{n})\times n + n$.
-- If  `--isolate_nodes` is set to false ( by default, it is true), the `oserver` and `client` can co-exist in the same node, and $npes = n1 + n2$.
+     - For example, if each node has `n` processors, then $npes = ceiling(\frac{n1}{n})\times n + n$.
+- If  `--isolate_nodes` is set to false (by default, it is true), the `oserver` and `client` can co-exist in the same node, and $npes = n1 + n2$.
 - `--npes_output_server n2` can be replaced by  `--nodes_output_server n2`. Then the $npes = ceiling(\frac{n1}{n})\times n + n2 \times n$.
 
 #### `n1` processes for the model and `n2` processes for the `MultiGroupServer` 
@@ -57,10 +57,10 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
     mpirun -np npes ExeccuTable –npes_model n1 --npes_output_server n2 --oserver_type multigroup --npes_backend_pernode n3
 ```
 
-- For each node of oserver, `n3` processes are used as backend.
-- For example, if each node has `n` cores, then `npes = ceiling(n1/n)*n + n2*n`.
-- The frontend has `n2*(n-n3)` processes and the backend has `n3*n` processes.
-- The frontend has `ceiling(n2/n)*(n-n3)` processes and the backend has `n3*n` processes.
+- For each node of oserver, $n3$ processes are used as backend.
+- For example, if each node has $n$ cores, then $npes = ceiling(\frac{n1}{n}) \times n + n2 \times n$.
+- The frontend has $n2 \times (n-n3)$ processes and the backend has $n3 \times n$ processes.
+- The frontend has $ceiling(\frac{n2}{n}) \times (n-n3)$ processes and the backend has $n3 \times n$ processes.
 
 #### Passing a vector of `oservers`
 
@@ -68,9 +68,9 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
     mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4
 ```
 
-- The command creates `n2`-node, `n3`-nodes and `n4`-nodes `MpiServer`.
+- The command creates $n2$-node, $n3$-nodes and $n4$-nodes `MpiServer`.
 - The `oservers` are independent. The client would take turns to send data to different `oservers`.
-- If each node has `n` processors, then `npes = ceiling(n1/n)*n + (n2+n3+n4)*n`.
+- If each node has $n$ processors, then $npes = ceiling(\frac{n1}{n}) \times n + (n2+n3+n4) \times n$.
 - **Advantage**: Since the `oservers` are independent, the `client` has the choice to send the data to the idle `oserver`.
 - **Disavantage**: Finding an idle `oserver` is not easy.
 
@@ -80,10 +80,10 @@ i.e., shuffling data and writing data to the disk. After `MpiServer` is done, th
     mpirun -np npes ExeccuTable –npes_model n1  --npes_output_server n2 n3 n4 --oserver_type multigroup --npes_backend_pernode n5
 ```
 
-- The command creates `n2`-node, `n3`-nodes and `n4`-nodes `MultiGroupServer`.
+- The command creates $n2$-node, $n3$-nodes and $n4$-nodes `MultiGroupServer`.
 - The `oservers` are independent. The `client` would take turns to send data to different `oservers`.
-- If each node has `n` processors, then `npes = ceiling(n1/n)*n + (n2+n3+n4)*n`.
-- Each `oserver` has `n2*n5`, `n3*n5`, and `n4*n5` backend processes respectively.
+- If each node has $n$ processors, then $npes = \lceil \frac{n1}{n} \rceil \times n + (n2+n3+n4) \times n$.
+- Each `oserver` has $n2 \times n5$, $n3 \times n5$, and $n4 \times n5$ backend processes respectively.
 
 
 #### `MpiServer` using one-sided `MPI_PUT` and shared memory
