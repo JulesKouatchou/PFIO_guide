@@ -1,7 +1,7 @@
 # Basic Instructions for Using PFIO
 
 
-**MpiServer Class**
+### MpiServer Class
 - The clients sends the data to `Oserver`.
 - All processors in `Oserver` would coordinate to create different shared memory windows for different collections.
 - The processors use one-sided `MPI_PUT` to send the data to the shared memory.
@@ -11,10 +11,10 @@
 ![MultiServer](fig_MpiServerClass.png)
 
 
-**MultiGroupServer Class**
+### MultiGroupServer Class
 - The oserver is devided into frontend and backend.
-- <font color="red">When the frontend receive the data,  its root process asks backend‘s root (or head) for an idle process for each collection</font>. Then it broadcasts the info to the other frontend processes.
-- When the frontend processors  forward (`MPI_SEND`)  the data to the backend ( different collections to different backend processors), they get back to the clients without waiting for the actual writing.
+- **When the frontend receive the data,  its root process asks backend‘s root (or head) for an idle process for each collection<**. Then it broadcasts the info to the other frontend processes.
+- When the frontend processors forward (`MPI_SEND`) the data to the backend ( different collections to different backend processors), they get back to the clients without waiting for the actual writing.
 
 ![MultiGroup](fig_MultiGroupServerClass.png)
 
@@ -223,6 +223,7 @@ For PFIO to be effective in LIS, we need at least two requirements:
 - The process to produce the HISTORY files is signficantly more expensive than the calculations.
 - The elapsed time between the full creation (writing into disk) two consecutive HISTORY files is less than the model integration time. 
     -  If not, the ouput node might be continually oversubcribed. 
+    -  By principle in PFIO, the frontend processors (FPs) forward the data to the backend and they get back to the clients (compute processors) without waiting for the actual writing of the data. It is possible for the clients to send new requests to the FPs while the FPs are still sending data to the backend.
 
 The LIS code does not have a profiler. In all the experiments we have done, we measure the total elapsed times.
 We plan to integrate a profiling tool in LIS that will allow us to better capture the time it takes to execute various components of the code.
