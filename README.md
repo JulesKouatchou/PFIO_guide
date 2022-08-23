@@ -280,6 +280,45 @@ We record the total time for a one-day integration and the HISTORY file created 
 As the number of computee cores increases, PFIO becomes less attractive.
 It is more likely due to the fact PFIO is not done before the model completes the calculations, therefore creation data congestion in the output server node.
 
+### Test Case 1
+
+- 5901x2801 grid points
+- Four-day integration with output produced every 1.5 hours (73 files with one record each)
+- The fields to be written out are:
+    - 10 2D fields
+    - 2 3D fields (with 4 levels)
+- Each file without data compression has a size of 412 Mb.
+
+
+|              |            | 84      |  112    | 140     | 168    | 196    | 224    | 512     |
+|  ---         |  ---       | ---     |  ---    | ---     | ---    | ---    | ---    | ---     |
+| **LIS**      | Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |  134.54 |
+|              | Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |  377.52 | 
+|              | Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |  700.85 |
+| **LIS/PFIO** | Run Method |  832.05 |  623.94 |  502.99 | 415.53 | 356.62 | 312.93 |  136.21 |
+|              | Output     |   67.20 |   70.05 |   60.47 |  61.79 |  59.91 |  56.82 | 1008.49 |
+|              | Overall    | 1242.06 |  975.82 |  829.25 | 728.86 | 647.03 | 604.91 | 1359.79 |
+
+
+
+### Test Case 2
+
+- 5901x2801 grid points
+- one-day integration with output produced every 1.5 hours (24 files with one record each)
+- The fields to be written out are:
+    - 80 2D fields
+    - 4 3D fields (with 4 levels)
+- Each file without compression has a size of 6.43 Gb.
+ 
+|              |            | 84   |  112 | 140 | 168 | 196 | 224 |
+|  ---         |  ---       | ---  |  --- | --- | --- | --- | --- |
+| **LIS**      | Run Method |      |      |     |     |     |     |
+|              | Output     |      |      |     |     |     |     |
+|              | Overall    |      |      |     |     |     |     |
+| **LIS/PFIO** | Run Method |      |      |     |     |     |     |
+|              | Output     |      |      |     |     |     |     |
+|              | Overall    |      |      |     |     |     |     |
+
 #### Comments
 
 From the above statistics, we can make the following comments:
