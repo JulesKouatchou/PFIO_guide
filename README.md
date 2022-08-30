@@ -290,20 +290,23 @@ It is more likely due to the fact PFIO is not done before the model completes th
 - Each file without data compression has a size of 412 Mb.
 
 
-|              |            | 84      |  112    | 140     | 168    | 196    | 224    | 512     |
-|  ---         |  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
-| **LIS**      | Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |  134.54 |
-|              | Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |  377.52 | 
-|              | Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |  700.85 |
+|            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
+|  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
+| Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |   |
+| Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |   | 
+| Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |   |
 
-**Table 1.1** Original version of the code: timiming statistics as the number of processors varies.
+**Table 1.1** LIS: timiming statistics as the number of processors varies.
 
-|              |            | 84      |  112    | 140     | 168    | 196    | 224    | 512     |
-|  ---         |  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
-| **LIS/PFIO** | Run Method |  832.05 |  623.94 |  502.99 | 415.53 | 356.62 | 312.93 |  136.21 |
-|              | Output     |   67.20 |   70.05 |   60.47 |  61.79 |  59.91 |  56.82 | 1008.49 |
-|              | Overall    | 1242.06 |  975.82 |  829.25 | 728.86 | 647.03 | 604.91 | 1359.79 |
 
+
+|            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
+|  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
+| Run Method |  832.05 |  623.94 |  502.99 | 415.53 | 356.62 | 312.93 |  |
+| Output     |   67.20 |   70.05 |   60.47 |  61.79 |  59.91 |  56.82 |  |
+| Overall    | 1242.06 |  975.82 |  829.25 | 728.86 | 647.03 | 604.91 |  |
+
+**Table 1.2** LIS/PFIO: timiming statistics as the number of processors varies and there is one IO node.
 
 
 ### Test Case 2
@@ -315,23 +318,34 @@ It is more likely due to the fact PFIO is not done before the model completes th
     - 4 3D fields (with 4 levels)
 - Each file without compression has a size of 6.43 Gb.
  
-|              |            | 84      |  112    | 140     | 168     | 196     | 224     |
-|  ---         |  ---       | ---     |  ---    | ---     | ---     | ---     | ---     |
-| **LIS**      | Run Method |  373.71 |  280.62 |  224.90 |  186.62 |  160.74 |  140.67 |
-|              | Output     | 1209.94 | 1229.54 | 1194.51 | 1228.61 | 1436.07 | 1420.89 |
-|              | Overall    | 2269.26 | 2171.23 | 2069.12 | 2059.28 | 2235.15 | 2188.14 |
+|            | 84      |  112    | 140     | 168     | 196     | 224     |
+|  ---       | ---:    |  ---:   | ---:    | ---:    | ---:    | ---:    |
+| Run Method |  373.71 |  280.62 |  224.90 |  186.62 |  160.74 |  140.67 |
+| Output     | 1209.94 | 1229.54 | 1194.51 | 1228.61 | 1436.07 | 1420.89 |
+| Overall    | 2269.26 | 2171.23 | 2069.12 | 2059.28 | 2235.15 | 2188.14 |
 
-|              |            | 84      |  112    | 140     | 168     | 196     | 224     |
-|  ---         |  ---       | ---     |  ---    | ---     | ---     | ---     | ---     |
-| **LIS/PFIO** | Run Method |         |         |         |         |         |         |
-|              | Output     |         |         |         |         |         |         |
-|              | Overall    |         |         |         |         |         |         |
+**Table 2.1** LIS: timiming statistics as the number of processors varies.
 
-|              |            | 84      |  112    | 140     | 168     | 196     | 224     |
-|  ---         |  ---       | ---     |  ---    | ---     | ---     | ---     | ---     |
-| **LIS/PFIO** | Run Method |         |         |         |         |         |         |
-|              | Output     |         |         |         |         |         |         |
-|              | Overall    |         |         |         |         |         |         |
+
+
+|            | 84      |  112    | 140     | 168     | 196     | 224     |
+|  ---       | ---:    |  ---:   | ---:    | ---:    | ---:    | ---:    |
+| Run Method |         |         |         |         |         |         |
+| Output     |         |         |         |         |         |         |
+| Overall    |         |         |         |         |         |         |
+
+**Table 2.2** LIS/PFIO: timiming statistics as the number of processors varies and there is one IO node.
+
+
+|            | 84      |  112    | 140     | 168     | 196     | 224     |
+|  ---       | ---:    |  ---:   | ---:    | ---:    | ---:    | ---:    |
+| Run Method |         |         |         |         |         |         |
+| Output     |         |         |         |         |         |         |
+| Overall    |         |         |         |         |         |         |
+
+**Table 2.3** LIS/PFIO: timiming statistics as the number of processors varies and there is two IO nodes. There are four virtual collections and 2 backend cores per node.
+
+
 
 #### Comments
 
