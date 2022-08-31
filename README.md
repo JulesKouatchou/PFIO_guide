@@ -308,14 +308,23 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 **Table 1.2** LIS/PFIO: timiming statistics as the number of processors varies and there is one IO node.
 
+|            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
+|  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
+| Run Method |  821.71 |  622.39 |  503.77 | 414.20 | 353.00 | 309.48 | 140.17  |
+| Output     |   36.67 |   37.21 |   37.97 |  38.27 |  36.16 |  33.12 | 193.81  |
+| Overall    | 1235.62 |  987.85 |  821.78 | 720.89 | 637.72 | 565.33 | 553.24  |
 
-When LIS/PFIO is run with 504 compute cores and 1 output node, the output time significantly increases. 
-The backends cores within the output node are more likely overwhelmed and require more time to write out the files on disc.
-We redid the same experiment by reconfiguring PFIO.
-Ar run time, we selected 4 virtual collections for the output files and 2 output nodes. 
-If 196 compute cores are used, only 36.16 seconds are spent for creating the output files and the overall time 637.72 seconds.
-With this new configuration, LIS/PFIO requires two times less computing resources compared to LIS (without PFIO) to have the same
-overall integration time.
+**Table 1.3** LIS/PFIO: timiming statistics as the number of processors varies and there are two IO nodes.
+
+|            | 504    |  644    | 784    | 
+|  ---       | ---:   |  ---:   | ---:   | 
+| Run Method | 139.95 |  114.77 |  89.97 | 
+| Output     |  78.22 |  134.53 | 284.14 | 
+| Overall    | 425.78 |  447.00 | 574.70 | 
+
+**Table 1.4** LIS/PFIO: timiming statistics as the number of processors varies and there are three IO nodes.
+
+
 
 ### Test Case 2
 
