@@ -292,9 +292,9 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 |            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
 |  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
-| Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |   |
-| Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |   | 
-| Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |   |
+| Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |  137.03 |
+| Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |  364.71 | 
+| Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |  687.49 |
 
 **Table 1.1** LIS: timiming statistics as the number of processors varies.
 
@@ -302,12 +302,20 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 |            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
 |  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
-| Run Method |  832.05 |  623.94 |  502.99 | 415.53 | 356.62 | 312.93 |  |
-| Output     |   67.20 |   70.05 |   60.47 |  61.79 |  59.91 |  56.82 |  |
-| Overall    | 1242.06 |  975.82 |  829.25 | 728.86 | 647.03 | 604.91 |  |
+| Run Method |  832.05 |  623.94 |  502.99 | 415.53 | 356.62 | 312.93 | 137.37 |
+| Output     |   67.20 |   70.05 |   60.47 |  61.79 |  59.91 |  56.82 | 942.47 |
+| Overall    | 1242.06 |  975.82 |  829.25 | 728.86 | 647.03 | 604.91 |1289.03 |
 
 **Table 1.2** LIS/PFIO: timiming statistics as the number of processors varies and there is one IO node.
 
+
+When LIS/PFIO is run with 504 compute cores and 1 output node, the output time significantly increases. 
+The backends cores within the output node are more likely overwhelmed and require more time to write out the files on disc.
+We redid the same experiment by reconfiguring PFIO.
+Ar run time, we selected 4 virtual collections for the output files and 2 output nodes. 
+If 196 compute cores are used, only 36.16 seconds are spent for creating the output files and the overall time 637.72 seconds.
+With this new configuration, LIS/PFIO requires two times less computing resources compared to LIS (without PFIO) to have the same
+overall integration time.
 
 ### Test Case 2
 
