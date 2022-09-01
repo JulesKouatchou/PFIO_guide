@@ -290,11 +290,11 @@ It is more likely due to the fact PFIO is not done before the model completes th
 - Each file without data compression has a size of 412 Mb.
 
 
-|            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
-|  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
-| Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |  137.03 |
-| Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |  364.71 | 
-| Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |  687.49 |
+|            | 84      |  112    | 140     | 168    | 196    | 224    | 504     | 1008   |
+|  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    | ---:   |
+| Run Method |  817.88 |  614.58 |  491.55 | 410.19 | 350.77 | 307.14 |  137.03 |  68.35 |
+| Output     |  395.95 |  334.99 |  299.88 | 290.55 | 268.05 | 252.47 |  364.71 | 216.24 |
+| Overall    | 1495.24 | 1224.56 | 1062.53 | 968.48 | 889.67 | 825.61 |  687.49 | 555.93 |
 
 **Table 1.1** LIS: timiming statistics as the number of processors varies.
 
@@ -328,8 +328,8 @@ It is more likely due to the fact PFIO is not done before the model completes th
 |                  |  4         |            |         |         |
 | 784              |  3         |  89.97     | 284.14  |  574.70 |
 |                  |  4         |            |         |         |
-| 1008             |  4         |            |         |         |
-|                  |  5         |            |         |         |
+| 1008             |  4         |   69.97    | 217.53  |  495.42 |
+|                  |  5         |   70.01    | 135.00  |  397.69 |
 
 **Table 1.2** LIS/PFIO: timiming statistics as the number of compute processors and the number of IO node vary. In each case, we use 2 backend cores per IO nodes and set the number virtual output collections to be two times the number of IO nodes.
 
