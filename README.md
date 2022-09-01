@@ -343,11 +343,11 @@ It is more likely due to the fact PFIO is not done before the model completes th
     - 4 3D fields (with 4 levels)
 - Each file without compression has a size of 6.43 Gb.
  
-|            | 84      |  112    | 140     | 168     | 196     | 224     |
-|  ---       | ---:    |  ---:   | ---:    | ---:    | ---:    | ---:    |
-| Run Method |  373.71 |  280.62 |  224.90 |  186.62 |  160.74 |  140.67 |
-| Output     | 1209.94 | 1229.54 | 1194.51 | 1228.61 | 1436.07 | 1420.89 |
-| Overall    | 2269.26 | 2171.23 | 2069.12 | 2059.28 | 2235.15 | 2188.14 |
+|            | 84      |  112    | 140     | 168     | 196     | 224     | 1008    |
+|  ---       | ---:    |  ---:   | ---:    | ---:    | ---:    | ---:    | ---:    |
+| Run Method |  373.71 |  280.62 |  224.90 |  186.62 |  160.74 |  140.67 |  31.24  |
+| Output     | 1209.94 | 1229.54 | 1194.51 | 1228.61 | 1436.07 | 1420.89 | 1331.73 |
+| Overall    | 2269.26 | 2171.23 | 2069.12 | 2059.28 | 2235.15 | 2188.14 | 2050.97 |
 
 **Table 2.1** LIS: timiming statistics as the number of processors varies.
 
