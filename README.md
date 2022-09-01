@@ -316,14 +316,22 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 **Table 1.3** LIS/PFIO: timiming statistics as the number of processors varies and there are two IO nodes. There are four virtual collections and 2 backend cores per node.
 
-|            | 504    |  644    | 784    | 
-|  ---       | ---:   |  ---:   | ---:   | 
-| Run Method | 139.95 |  114.77 |  89.97 | 
-| Output     |  78.22 |  134.53 | 284.14 | 
-| Overall    | 425.78 |  447.00 | 574.70 | 
 
-**Table 1.4** LIS/PFIO: timiming statistics as the number of processors varies and there are three IO nodes. There are six virtual collections and 2 backend cores per node.
+| # compute cores  | # IO Nodes | Run Method | Output  | Overall |
+| ----             |  ----      | ----:      | ----:   | ----:   |
+| 224              |  1         | 312.93     |  56.82  |  604.91 |
+|                  |  2         | 309.48     |  33.12  |  565.33 |
+| 504              |  1         | 137.37     | 942.47  | 1289.03 |
+|                  |  2         | 140.17     | 193.81  |  553.24 |
+|                  |  3         | 139.95     |  78.22  |  425.78 |
+| 644              |  3         | 114.77     | 134.53  |  447.00 |
+|                  |  4         |            |         |         |
+| 784              |  3         |  89.97     | 284.14  |  574.70 |
+|                  |  4         |            |         |         |
+| 1008             |  4         |            |         |         |
+|                  |  5         |            |         |         |
 
+**Table 1.2** LIS/PFIO: timiming statistics as the number of compute processors and the number of IO node vary. In each case, we use 2 backend cores per IO nodes and set the number virtual output collections to be two times the number of IO nodes.
 
 
 ### Test Case 2
