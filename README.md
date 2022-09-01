@@ -365,6 +365,7 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 **Table 2.2** LIS/PFIO: timiming statistics as the number of compute processors and the number of IO node vary. In each case, we use 2 backend cores per IO nodes and set the number virtual output collections to be two times the number of IO nodes.
 
+<!---
 
 #### Comments
 
@@ -375,3 +376,5 @@ From the above statistics, we can make the following comments:
 - At deflation level 9, the time to collect the data and do data compression appears to be higher than the model computing time. PFIO performs very poorly.
 - PFIO works better when the model computations require more time than the communications between the computing cores and the IO servers.
 - As we increase the model resolution and the IO dominates the model calculations, we expect PFIO to perform better.
+
+--->
