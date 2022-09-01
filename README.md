@@ -344,31 +344,17 @@ It is more likely due to the fact PFIO is not done before the model completes th
 **Table 2.1** LIS: timiming statistics as the number of processors varies.
 
 
-|            | 224     | 504     | 644     |
-|  ---       | ---:    | ---:    | ---:    |
-| Run Method |  143.93 |         |         |
-| Output     | 1021.35 |         |         |
-| Overall    | 1963.34 |         |         |
+| # compute cores  | # IO Nodes | Run Method | Output  | Overall |
+| ----             |  ----      | ----:      | ----:   | ----:   |
+| 224              |  2         | 143.93     | 1021.35 | 1963.34 |
+|                  |  3         | 144.25     |  535.86 | 1422.43 |
+| 504              |  2         |            |         |         |
+|                  |  3         |  64.07     | 1631.45 | 2358.15 |
+| 1008             |  6         |            |         |         |
+|                  |  8         |  31.81     |  603.19 | 1899.65 |
 
-**Table 2.2** LIS/PFIO: timiming statistics as the number of processors varies and there are two IO nodes. There are four virtual collections and 2 backend cores per node.
+**Table 2.2** LIS/PFIO: timiming statistics as the number of compute processors and the number of IO node vary. In each case, we use 2 backend cores per IO nodes and set the number virtual output collections to be two times the number of IO nodes.
 
-
-|            | 224     | 504     |
-|  ---       | ---:    | ---:    |
-| Run Method |  144.25 |   64.07 |       
-| Output     |  535.86 | 1631.45 |        
-| Overall    | 1422.43 | 2358.15 |       
-
-**Table 2.3** LIS/PFIO: timiming statistics as the number of processors varies and there are three IO nodes. There are six virtual collections and 2 backend cores per node.
-
-| # cores  | # IO Nodes | Run Method | Output  | Overall |
-| ----     |  ----      | ----:      | ----:   | ----:   |
-| 224      |  2         | 143.93     | 1021.35 | 1963.34 |
-|          |  3         | 144.25     |  535.86 | 1422.43 |
-| 504      |  2         |            |         |         |
-|          |  3         |  64.07     | 1631.45 | 2358.15 |
-| 1008     |  6         |            |         |         |
-|          |  8         |            |         |         |
 
 #### Comments
 
