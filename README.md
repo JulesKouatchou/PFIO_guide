@@ -299,6 +299,7 @@ It is more likely due to the fact PFIO is not done before the model completes th
 **Table 1.1** LIS: timiming statistics as the number of processors varies.
 
 
+<!---
 
 |            | 84      |  112    | 140     | 168    | 196    | 224    | 504     |
 |  ---       | ---:    |  ---:   | ---:    | ---:   | ---:   | ---:   | ---:    |
@@ -316,6 +317,7 @@ It is more likely due to the fact PFIO is not done before the model completes th
 
 **Table 1.3** LIS/PFIO: timiming statistics as the number of processors varies and there are two IO nodes. There are four virtual collections and 2 backend cores per node.
 
+--->
 
 | # compute cores  | # IO Nodes | Run Method | Output  | Overall |
 | ----             |  ----      | ----:      | ----:   | ----:   |
